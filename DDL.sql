@@ -1,7 +1,7 @@
 CREATE TABLE Users (
     User_ID SERIAL PRIMARY KEY,
     First_Name VARCHAR(50) NOT NULL,
-    Surname VARCHAR(50) NOT NULL,
+    Last_Name VARCHAR(50) NOT NULL,
     Email_Address VARCHAR(100) NOT NULL UNIQUE,
     Phone VARCHAR(20) NOT NULL UNIQUE,
     Image bytea,
@@ -50,20 +50,22 @@ CREATE TABLE Class (
         )
     ),
     Description TEXT,
-    Class_Time_Start TIME NOT NULL CHECK (Class_Time_Start >= '06:00'
+    Class_Time_Start TIME NOT NULL CHECK (
+        Class_Time_Start >= '06:00'
         AND Class_Time_Start <= '22:00'
-    )),
-        Class_Time_Finish TIME NOT NULL CHECK (Class_Time_Finish >= '06:00'
+    ),
+    Class_Time_Finish TIME NOT NULL CHECK (
+        Class_Time_Finish >= '06:00'
         AND Class_Time_Finish <= '22:00'
     ),
     Maximum_Class_Capacity INTEGER NOT NULL,
     Difficulty_Level VARCHAR(20) NOT NULL CHECK (
-        Difficulty_level IN ('beginner', 'intermediate', 'advanced')
-    );
-
+        Difficulty_Level IN ('beginner', 'intermediate', 'advanced')
+    )
+);
 CREATE TABLE Booking (
     Booking_ID SERIAL PRIMARY KEY,
-    Booking_Date VARCHAR(10) NOT NULL CHECK (Booking_Date IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
+    Booking_Day VARCHAR(10) NOT NULL CHECK (Booking_Day IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
     Booking_Time_Start TIME NOT NULL CHECK (
         Booking_Time_Start >= '06:00'
         AND Booking_Time_Start <= '22:00'
@@ -95,9 +97,9 @@ CREATE TABLE Payment (
 
 -- Inserts
 
-INSERT INTO Users (First_Name, Surname, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, 2023-03-01 11:02:30.963486, 'monthly', TRUE);
-INSERT INTO Users (First_Name, Surname, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543', NULL, 2019-01-27 06:05:10.315827, 'yearly', TRUE);
-INSERT INTO Users (First_Name, Surname, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, 2022-07-13 19:43:51.204736,'half-yearly', FALSE);7
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, 2023-03-01 11:02:30.963486, 'monthly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543', NULL, 2019-01-27 06:05:10.315827, 'yearly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, 2022-07-13 19:43:51.204736,'half-yearly', FALSE);7
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
 VALUES ('<imagen en bytes>', 'Marta', 'García', 'yoga', '08:00', '12:00');
@@ -122,15 +124,15 @@ VALUES (4, 'Spin Class', 'cardio', 'An indoor cycling class that simulates an ou
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (3, 'HIIT', 'cardio', 'High Intensity Interval Training', '19:30', '20:30', 20, 'advanced');
 
-INSERT INTO Booking (Booking_Date, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
+INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Wednesday', '14:00', '16:00', 'confirmed', 1, 4);
-INSERT INTO Booking (Booking_Date, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
+INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Saturday', '10:00', '11:30', 'on_hold', 2, 1);
-INSERT INTO Booking (Booking_Date, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
+INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Thursday', '18:00', '19:30', 'confirmed', 3, 2);
-INSERT INTO Booking (Booking_Date, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
+INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Monday', '08:00', '09:00', 'canceled', 4, 3);
-INSERT INTO Booking (Booking_Date, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
+INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Sunday', '20:00', '21:00', 'on_hold', 5, 5);
 
 
