@@ -28,7 +28,7 @@ CREATE TABLE Instructor (
     ),
     Schedule_Start TIME NOT NULL CHECK (
         Schedule_Start >= '06:00'
-        AND Schedule_Start < '12:00'
+        AND Schedule_Start <= '12:00'
     ),
     Schedule_End TIME NOT NULL CHECK (
         Schedule_End >= '16:00'
@@ -97,28 +97,33 @@ CREATE TABLE Payment (
 
 -- Inserts
 
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, 2023-03-01 11:02:30.963486, 'monthly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543', NULL, 2019-01-27 06:05:10.315827, 'yearly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, 2022-07-13 19:43:51.204736,'half-yearly', FALSE);7
+ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
+
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, '2023-03-01 11:02:30.963', 'monthly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543', NULL, '2019-01-27 06:05:10.315', 'yearly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, '2022-07-13 19:43:51.204','half-yearly', FALSE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Maria', 'Gonzalez', 'mariagonzalez@example.com', '+1 (555) 563-6589', NULL, '2023-03-28 15:30:00', 'monthly', TRUE);
+
+ALTER SEQUENCE instructor_id_instructor_seq RESTART WITH 1;
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Marta', 'García', 'yoga', '08:00', '12:00');
+VALUES ('<imagen en bytes>', 'Marta', 'García', 'yoga', '08:00', '16:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Juan', 'Pérez', 'cardio', '14:00', '18:00');
+VALUES ('<imagen en bytes>', 'Juan', 'Pérez', 'cardio', '11:00', '18:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Sofía', 'Martínez', 'Strength and endurance training', '10:00', '14:00');
+VALUES ('<imagen en bytes>', 'Sofía', 'Martínez', 'Strength and endurance training', '10:00', '16:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Pedro', 'López', 'personalized training', '16:00', '20:00');
+VALUES ('<imagen en bytes>', 'Pedro', 'López', 'personalized training', '11:00', '20:00');
 
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (1, 'Hatha Yoga', 'yoga', 'A gentle and slower-paced yoga class that focuses on breathing and basic yoga poses.', '08:00:00', '09:00:00', 10, 'intermediate');
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (2, 'Mat Pilates', 'pilates', 'A class that focuses on strengthening the core and improving posture through controlled movements and breathing.', '11:00:00', '12:00:00', 8, 'advanced');
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
-VALUES (3, 'HIIT Training', 'personalized training', 'A high-intensity interval training class that involves short bursts of intense exercises followed by short periods of rest.', '07:00:00', '08:00:00', 6, 'advanced');
+VALUES (3, 'HIIT Training', 'personal training', 'A high-intensity interval training class that involves short bursts of intense exercises followed by short periods of rest.', '07:00:00', '08:00:00', 6, 'advanced');
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (4, 'Spin Class', 'cardio', 'An indoor cycling class that simulates an outdoor bike ride and focuses on improving cardiovascular fitness.', '17:00:00', '18:00:00', 15, 'intermediate');
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
@@ -133,7 +138,7 @@ VALUES ('Thursday', '18:00', '19:30', 'confirmed', 3, 2);
 INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
 VALUES ('Monday', '08:00', '09:00', 'canceled', 4, 3);
 INSERT INTO Booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish, STATUS, User_ID, Class_ID)
-VALUES ('Sunday', '20:00', '21:00', 'on_hold', 5, 5);
+VALUES ('Sunday', '20:00', '21:00', 'on_hold', 2, 5);
 
 
 INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Payment_Status, Payment_Method_Used)
