@@ -21,7 +21,7 @@ CREATE TABLE Instructor (
         Specialty IN (
             'yoga',
             'pilates',
-            'personalized training',
+            'personal training',
             'cardio',
             'Strength and endurance training'
         )
@@ -44,7 +44,7 @@ CREATE TABLE Class (
         Category IN (
             'yoga',
             'pilates',
-            'personalized training',
+            'personal training',
             'cardio',
             'Strength and endurance training'
         )
@@ -116,7 +116,7 @@ INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start,
 VALUES ('<imagen en bytes>', 'Sofía', 'Martínez', 'Strength and endurance training', '10:00', '16:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Pedro', 'López', 'personalized training', '11:00', '20:00');
+VALUES ('<imagen en bytes>', 'Pedro', 'López', 'personal training', '11:00', '20:00');
 
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (1, 'Hatha Yoga', 'yoga', 'A gentle and slower-paced yoga class that focuses on breathing and basic yoga poses.', '08:00:00', '09:00:00', 10, 'intermediate');
@@ -148,6 +148,6 @@ VALUES (3, '2023-02-01', 600.00, 'yearly', 'paid', 'bank transfer');
 INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Payment_Status, Payment_Method_Used)
 VALUES (4, '2023-03-15', 40.00, 'monthly', 'pending', 'cash');
 INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Payment_Status, Payment_Method_Used)
-VALUES (5, '2023-01-20', 500.00, 'yearly', 'rejected', 'credit card');
+VALUES (2, '2023-01-20', 500.00, 'yearly', 'rejected', 'credit card');
 INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Payment_Status, Payment_Method_Used)
 VALUES (1, '2023-04-01', 100.00, 'half-yearly', 'paid', 'credit card');
