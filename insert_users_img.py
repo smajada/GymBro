@@ -32,10 +32,10 @@ try:
 		open('imgs/woman-4.jpg', 'rb').read())	 # Image
 
 	# And Finally we pass the above mentioned values to the insert_script variable.
-	insert_values = [('man-2.jpg', 2), ('man-1.jpg', 1), ('woman-3.jpg', 3), ('woman-4.jpg', 4)]
+	insert_values_users = [(BLOB_2, 2), (BLOB_1, 1), (BLOB_3, 3), (BLOB_4, 4)]
 
 	# The execute() method with the insert_script & insert_value as argument.
-	for insert_value in insert_values:
+	for insert_value in insert_values_users:
 		cur.execute(insert_script, insert_value)
 		print(insert_value[0], insert_value[1],
 			"[Binary Data]", "row Inserted Successfully")
