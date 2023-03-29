@@ -14,6 +14,7 @@ What things you need to install software and how to install them
 PgAdmin
 PostgreSQL
 Python3
+Psycopg2
 ```
 
 ### Installation
@@ -28,7 +29,7 @@ A series of step-by-step examples explaining how to run the project.
 
 #### For the Blobs:
 1. Open the insert_blob.py file and insert your PostgreSQL database password.
-2. Run the python script and the images will insert into the database.
+2. Run the python scripts and the images will insert into the database.
 ## Built with
 
 - [PostgreSQL](https://https://www.postgresql.org/) - a powerful open-source object-relational database management system (ORDBMS).
