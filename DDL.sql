@@ -95,7 +95,7 @@ CREATE TABLE Payment (
     )
 );
 
--- Inserts
+-- INSERTS
 
 TRUNCATE Users RESTART IDENTITY CASCADE;
 
@@ -152,3 +152,67 @@ INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Paymen
 VALUES (2, '2023-01-20', 500.00, 'yearly', 'rejected', 'credit card');
 INSERT INTO Payment (User_ID, Date_Of_Payment, Amount, Subscription_Type, Payment_Status, Payment_Method_Used)
 VALUES (1, '2023-04-01', 100.00, 'half-yearly', 'paid', 'credit card');
+
+
+-- INDEXES
+
+CREATE INDEX idx_users ON users (First_Name, Last_Name);
+CREATE INDEX idx_instructor ON instructor (First_Name, Last_Name, Specialty);
+CREATE INDEX idx_class ON class (Name, Category, Class_Time_Start, Class_Time_Finish);
+CREATE INDEX idx_booking ON booking (Booking_Day, Booking_Time_Start, Booking_Time_Finish);
+CREATE INDEX idx_payment ON payment (Date_Of_Payment, Payment_Status);
+
+
+-- VIEWS
+
+-- Creates a view to store the logged-in user id.
+CREATE VIEW current_user_id AS
+SELECT usesysid
+FROM pg_stat_activity
+WHERE pid = pg_backend_pid();
+
+
+-- Creates a view to collect data from user table for logged-in user only.
+CREATE VIEW user_veryfied AS
+SELECT * FROM Users, current_user_id WHERE user_id = usesysid;
+
+
+-- Creates a view to collect data from instructor table for logged-in user only.
+CREATE VIEW instructor_veryfied AS
+SELECT * FROM Instructor, current_user_id WHERE id_instructor = usesysid;
+
+
+-- Creates a view for bookings that belong to the instructor who is currently logged in.
+CREATE VIEW booking_instructor AS
+SELECT C.*
+FROM Instructor I, current_user_id, Class C
+JOIN Booking B ON C.class_id = B.class_id
+WHERE C.id_instructor = I.id_instructor
+AND I.id_instructor = usesysid;
+
+-- ROLES AND PRIVILEGES
+
+CREATE ROLE Client;
+CREATE ROLE Instructor;
+CREATE ROLE Administrator;
+
+-- Client
+GRANT SELECT, INSERT, UPDATE ON user_veryfied TO Client;
+GRANT SELECT ON Users TO Client;
+GRANT SELECT ON Instructor TO Client;
+GRANT SELECT, INSERT ON Class TO Client;
+GRANT SELECT, INSERT ON Booking TO Client;
+GRANT SELECT, INSERT ON Payment TO Client;
+
+
+-- Instructor
+GRANT SELECT, INSERT, UPDATE ON booking_instructor TO Instructor;
+GRANT SELECT, INSERT, UPDATE ON instructor_veryfied TO Instructor;
+GRANT SELECT ON Users TO Instructor;
+GRANT SELECT ON Instructor TO Instructor;
+GRANT SELECT ON Class TO Instructor;
+GRANT SELECT ON Booking TO Instructor;
+GRANT SELECT ON Payment TO Instructor;
+
+-- Administrator
+GRANT ALL ON TABLE Users, Instructor, Class, Booking, Payment TO Administrator;
