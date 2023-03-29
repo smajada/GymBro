@@ -97,26 +97,27 @@ CREATE TABLE Payment (
 
 -- Inserts
 
-ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
+TRUNCATE Users RESTART IDENTITY CASCADE;
 
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', bytea('\imgs\man-1.jpg'), '2023-03-01 11:02:30.963', 'monthly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543',  bytea('\imgs\woman-3.jpg'), '2019-01-27 06:05:10.315', 'yearly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555',  bytea('\imgs\man-2.jpg'), '2022-07-13 19:43:51.204','half-yearly', FALSE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Maria', 'Gonzalez', 'mariagonzalez@example.com', '+1 (555) 563-6589',  bytea('\imgs\woman-4.jpg'), '2023-03-28 15:30:00', 'monthly', TRUE);
 
-ALTER SEQUENCE instructor_id_instructor_seq RESTART WITH 1;
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, '2023-03-01 11:02:30.963', 'monthly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543',  NULL, '2019-01-27 06:05:10.315', 'yearly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, '2022-07-13 19:43:51.204','half-yearly', FALSE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Maria', 'Gonzalez', 'mariagonzalez@example.com', '+1 (555) 563-6589',  NULL, '2023-03-28 15:30:00', 'monthly', TRUE);
 
-INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Marta', 'García', 'yoga', '08:00', '16:00');
+TRUNCATE Instructor RESTART IDENTITY CASCADE;
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Juan', 'Pérez', 'cardio', '11:00', '18:00');
+VALUES (NULL, 'Marta', 'García', 'yoga', '08:00', '16:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Sofía', 'Martínez', 'Strength and endurance training', '10:00', '16:00');
+VALUES (NULL, 'Juan', 'Pérez', 'cardio', '11:00', '18:00');
 
 INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
-VALUES ('<imagen en bytes>', 'Pedro', 'López', 'personal training', '11:00', '20:00');
+VALUES (NULL, 'Sofía', 'Martínez', 'Strength and endurance training', '10:00', '16:00');
+
+INSERT INTO Instructor (Image, First_Name, Last_Name, Specialty, Schedule_Start, Schedule_End)
+VALUES (NULL, 'Pedro', 'López', 'personal training', '11:00', '20:00');
 
 INSERT INTO Class (ID_Instructor, Name, Category, Description, Class_Time_Start, Class_Time_Finish, Maximum_Class_Capacity, Difficulty_Level)
 VALUES (1, 'Hatha Yoga', 'yoga', 'A gentle and slower-paced yoga class that focuses on breathing and basic yoga poses.', '08:00:00', '09:00:00', 10, 'intermediate');
