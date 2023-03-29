@@ -38,4 +38,4 @@ A series of step-by-step examples explaining how to run the project.
 ## Authors
 
 - **Sergio Majada** - *Initial Work* - [smajada](https://github.com/smajada)
-- **David Ramirez** - *Initial Work* - [dararu](https://github.com/dararu)
+- **David Ramirez** - *Initial Work* - [davidzz-code](https://github.com/davidzz-code)
