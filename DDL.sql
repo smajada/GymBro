@@ -99,10 +99,10 @@ CREATE TABLE Payment (
 
 ALTER SEQUENCE users_user_id_seq RESTART WITH 1;
 
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', NULL, '2023-03-01 11:02:30.963', 'monthly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543', NULL, '2019-01-27 06:05:10.315', 'yearly', TRUE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555', NULL, '2022-07-13 19:43:51.204','half-yearly', FALSE);
-INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Maria', 'Gonzalez', 'mariagonzalez@example.com', '+1 (555) 563-6589', NULL, '2023-03-28 15:30:00', 'monthly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('John', 'Doe', 'johndoe@example.com', '+1 (555) 123-4567', bytea('\imgs\man-1.jpg'), '2023-03-01 11:02:30.963', 'monthly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Jane', 'Smith', 'janesmith@example.com', '+1 (555) 987-6543',  bytea('\imgs\woman-3.jpg'), '2019-01-27 06:05:10.315', 'yearly', TRUE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Robert', 'Johnson', 'robertjohnson@example.com', '+1 (555) 555-5555',  bytea('\imgs\man-2.jpg'), '2022-07-13 19:43:51.204','half-yearly', FALSE);
+INSERT INTO Users (First_Name, Last_Name, Email_Address, Phone, Image, Registration_Time, Subscription_Type, Subscription_Status) VALUES ('Maria', 'Gonzalez', 'mariagonzalez@example.com', '+1 (555) 563-6589',  bytea('\imgs\woman-4.jpg'), '2023-03-28 15:30:00', 'monthly', TRUE);
 
 ALTER SEQUENCE instructor_id_instructor_seq RESTART WITH 1;
 
