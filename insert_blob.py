@@ -13,11 +13,9 @@ try:
 
 	# Creating a cursor with name cur.
 	cur = conn.cursor()
-	cur.execute(
-		"UPDATE courses SET published_date = '2020-08-01' WHERE course_id = 3;")
-	# SQL query to insert data into the database.
 	insert_script = '''
-		INSERT INTO blob_datastore(s_no,file_name,blob_data) VALUES (%s,%s,%s);
+		UPDATE Users SET Image = %s WHERE User_ID = %s;
+
 	'''
 
 	# open('File,'rb').read() is used to read the file.
@@ -34,7 +32,7 @@ try:
 		open('imgs/woman-4.jpg', 'rb').read())	 # Image
 
 	# And Finally we pass the above mentioned values to the insert_script variable.
-	insert_values = [(2, 'man-2.jpg', BLOB_2), (1, 'man-1.jpg', BLOB_1), (3, 'woman-3.jpg', BLOB_3), (4, 'woman-4.jpg', BLOB_4)]
+	insert_values = [('man-2.jpg', 2), ('man-1.jpg', 1), ('woman-3.jpg', 3), ('woman-4.jpg', 4)]
 
 	# The execute() method with the insert_script & insert_value as argument.
 	for insert_value in insert_values:
@@ -42,14 +40,6 @@ try:
 		print(insert_value[0], insert_value[1],
 			"[Binary Data]", "row Inserted Successfully")
 
-	# SQL query to fetch data from the database.
-	cur.execute('SELECT * FROM BLOB_DataStore')
-
-	# open(file,'wb').write() is used to write the binary data to the file.
-	for row in cur.fetchall():
-		BLOB = row[2]
-		open("new"+row[1], 'wb').write(BLOB)
-		print(row[0], row[1], "BLOB Data is saved in Current Directory")
 
 	# Close the connection
 	cur.close()
