@@ -14,7 +14,7 @@ try:
 	# Creating a cursor with name cur.
 	cur = conn.cursor()
 	insert_script = '''
-		UPDATE Users SET Image = %s WHERE User_ID = %s;
+		UPDATE Instructor SET Image = %s WHERE id_instructor = %s;
 
 	'''
 
@@ -23,19 +23,20 @@ try:
 	# psycopg2.Binary(File_in_Bytes) is used to convert the binary data to a BLOB data type.
 
 	BLOB_1 = psycopg2.Binary(
-		open('users_imgs/man-1.jpg', 'rb').read())	 # Image
+		open('instructor_imgs/woman-1.jpg', 'rb').read())	 # Image
 	BLOB_2 = psycopg2.Binary(
-		open('users_imgs/man-2.jpg', 'rb').read())	 # Image
+		open('instructor_imgs/man-2.jpg', 'rb').read())	 # Image
 	BLOB_3 = psycopg2.Binary(
-		open('users_imgs/woman-3.jpg', 'rb').read())	 # Image
+		open('instructor_imgs/woman-3.jpg', 'rb').read())	 # Image
 	BLOB_4 = psycopg2.Binary(
-		open('users_imgs/woman-4.jpg', 'rb').read())	 # Image
+		open('instructor_imgs/man-4.jpg', 'rb').read())	 # Image
+
 
 	# And Finally we pass the above mentioned values to the insert_script variable.
-	insert_values_users = [(BLOB_2, 2), (BLOB_1, 1), (BLOB_3, 3), (BLOB_4, 4)]
+	insert_values_instructor = [(BLOB_2, 2), (BLOB_1, 1), (BLOB_3, 3), (BLOB_4, 4)]
 
 	# The execute() method with the insert_script & insert_value as argument.
-	for insert_value in insert_values_users:
+	for insert_value in insert_values_instructor:
 		cur.execute(insert_script, insert_value)
 		print(insert_value[0], insert_value[1],
 			"[Binary Data]", "row Inserted Successfully")
